@@ -1,7 +1,6 @@
 // from data.js
 let tableData = data;
 
-let form = d3.select("#filters");
 let button = d3.select("#filter-btn");
 let tbody = d3.select("tbody");
 
@@ -13,10 +12,7 @@ tableData.forEach((encounter) => {
     });
 });
 
-
 button.on("click", runEnter);
-form.on("submit", runEnter);
-
 
 function runEnter() {
 
