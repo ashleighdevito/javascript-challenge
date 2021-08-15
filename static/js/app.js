@@ -1,27 +1,37 @@
 // from data.js
 let tableData = data;
 
-let form = d3.select("#datetime");
+let form = d3.select("#filters");
 let button = d3.select("#filter-btn");
 let tbody = d3.select("tbody");
 
-// YOUR CODE HERE!
+tableData.forEach((encounter) => {
+    let row = tbody.append("tr");
+    Object.entries(encounter).forEach(([key, value]) => {
+        let cell = row.append("td");
+        cell.text(value);
+    });
+});
+
+
 button.on("click", runEnter);
 form.on("submit", runEnter);
+
 
 function runEnter() {
 
     d3.event.preventDefault();
 
-    let inputValue = form.property("value");
+    tbody.html("");
 
-    function dateselect(encounter) {
-        return encounter.datetime == inputValue;
-    }
+    let inputField = d3.select("#datetime");
+    let inputValue = inputField.property("value");
 
-    let sightinglist = tableData.filter(dateselect);
+    console.log(inputValue);
 
-    sightingslist.forEach((encounter) => {
+    let sightinglist = tableData.filter(encounter => encounter.datetime === inputValue);
+
+    sightinglist.forEach((encounter) => {
         let row = tbody.append("tr");
         Object.entries(encounter).forEach(([key, value]) => {
             let cell = row.append("td");
